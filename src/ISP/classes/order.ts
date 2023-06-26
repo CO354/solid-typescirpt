@@ -2,6 +2,7 @@ import { OrderStatus } from './interfaces/orderStatus';
 import { Messaging } from '../services/messaging';
 import { SaveOrder } from '../services/saveOrder';
 import { ShoppingCart } from './shopping-cart';
+import { CustomerOrder } from './customer-protocolo';
 
 export class Order {
   private _orderStatus: OrderStatus = 'open'; //supeitando
@@ -9,6 +10,7 @@ export class Order {
     private readonly cart: ShoppingCart,
     private readonly message: Messaging,
     private readonly saveOrder: SaveOrder,
+    private readonly customer: CustomerOrder,
   ) {}
 
   // considerado como uma propriedade que nao deve estar aqui
@@ -27,5 +29,9 @@ export class Order {
     );
     this.saveOrder.saveOrder();
     this.cart.clear();
+    console.log(
+      'o cliente é: ' + this.customer.geIDN(),
+      this.customer.getName(),
+    );
   }
 }

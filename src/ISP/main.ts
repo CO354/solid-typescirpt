@@ -1,11 +1,9 @@
 /*
-Liskov Substituition principle (Principio da Substiuicao de Liskov)-
-se Fi(x) é uma propriedade demonstravel dos objectos x de tipo T. Entao Fi(y)
-deve ser Verdadeiro para objectos y de Tipo S onde S é um subtipo de T.
+(ISP) Interface Segregation Principle
+O Princípio da Segregação de Interface
+trata das desvantagens da implementação de interfaces “gordas”.
 
-Simplificado: Subtipos precisam ser substituiveis por seus tipos de base.
-Mais Simplificado ainda: Se meu programa espera um Animal, algo do tipo
-Cachorro (que herda de Animal) deve servir como qualquer outro Animal.
+
 */
 
 import { Messaging } from './services/messaging';
@@ -14,12 +12,22 @@ import { Product } from './classes/product';
 import { SaveOrder } from './services/saveOrder';
 import { ShoppingCart } from './classes/shopping-cart';
 import { FiftyPercenceDiscount } from './classes/discount';
+import { EnterpriseCustomer, IndividualCustomer } from './classes/customer';
 
+// const individualCustomer = new IndividualCustomer(
+//   'Anselmo',
+//   'Jornal',
+//   '25144444-44',
+// );
+const enterpriseCustomer = new EnterpriseCustomer(
+  'Enterprise Foc',
+  '11111-111',
+);
 const discount = new FiftyPercenceDiscount();
 const shoppingCart = new ShoppingCart(discount);
 const messaging = new Messaging();
 const saveOrder = new SaveOrder();
-const order = new Order(shoppingCart, messaging, saveOrder);
+const order = new Order(shoppingCart, messaging, saveOrder, enterpriseCustomer);
 
 shoppingCart.addItem(new Product('Camisa', 12));
 shoppingCart.addItem(new Product('Caderno', 21));
